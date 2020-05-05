@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { AppLoading } from "expo";
 import * as Font from "expo-font";
-import * as Asset from "expo-asset";
-import { Text, View, AsyncStorage } from "react-native";
+import { Asset } from "expo-asset";
+import { Text, View, AsyncStorage, TouchableOpacity } from "react-native";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { persistCache } from "apollo-cache-persist";
 import ApolloClient from "apollo-boost";
@@ -37,7 +37,7 @@ export default function App() {
       );
 
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
-      if (isLoggedIn === null || isLoggedIn === false) {
+      if (isLoggedIn === null || isLoggedIn === "false") {
         setIsLoggedIn(false);
       } else {
         setIsLoggedIn(true);
@@ -51,11 +51,40 @@ export default function App() {
   useEffect(() => {
     preLoad();
   }, []);
+
+  const logUserIn = async () => {
+    try {
+      await AsyncStorage.setItem("isLoggedIn", "true");
+      setIsLoggedIn(true);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const logUserOut = async () => {
+    try {
+      await AsyncStorage.setItem("isLoggedIn", "false");
+      setIsLoggedIn(false);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return loaded && client && isLoggedIn !== null ? (
     <ApolloProvider client={client}>
       <ThemeProvider theme={styles}>
-        <View>
-          {isLoggedIn === true ? <Text>I'm in</Text> : <Text>I'm out</Text>}
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          {isLoggedIn === false ? (
+            <TouchableOpacity onPress={logUserIn}>
+              <Text>I'm in</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity onPress={logUserOut}>
+              <Text>I'm out</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ThemeProvider>
     </ApolloProvider>
