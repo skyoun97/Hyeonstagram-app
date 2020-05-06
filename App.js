@@ -39,6 +39,7 @@ export default function App() {
         })
       );
 
+      await AsyncStorage.setItem("isLoggedIn", "true");
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
       if (isLoggedIn === null || isLoggedIn === "false") {
         setIsLoggedIn(false);
