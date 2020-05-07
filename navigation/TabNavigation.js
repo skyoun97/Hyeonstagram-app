@@ -1,6 +1,5 @@
 import React from "react";
 import "react-native-gesture-handler";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Search from "../screens/Search";
@@ -10,25 +9,24 @@ import { View } from "react-native";
 
 const TabNavigation = createBottomTabNavigator();
 
-export default () => {
+export default ({ navigation }) => {
   return (
-    <NavigationContainer>
-      <TabNavigation.Navigator>
-        <TabNavigation.Screen name="Home" component={Home} />
-        <TabNavigation.Screen name="Search" component={Search} />
-        <TabNavigation.Screen
-          name="Add"
-          component={View}
-          listeners={{
-            tabPress: (e) => {
-              e.preventDefault();
-              console.log("ADD");
-            },
-          }}
-        />
-        <TabNavigation.Screen name="Notifications" component={Notifications} />
-        <TabNavigation.Screen name="Profile" component={Profile} />
-      </TabNavigation.Navigator>
-    </NavigationContainer>
+    <TabNavigation.Navigator>
+      <TabNavigation.Screen name="Home" component={Home} />
+      <TabNavigation.Screen name="Search" component={Search} />
+      <TabNavigation.Screen
+        name="Add"
+        component={View}
+        listeners={{
+          tabPress: (e) => {
+            e.preventDefault();
+            console.log("ADD");
+            navigation.navigate("PhotoNavigation");
+          },
+        }}
+      />
+      <TabNavigation.Screen name="Notifications" component={Notifications} />
+      <TabNavigation.Screen name="Profile" component={Profile} />
+    </TabNavigation.Navigator>
   );
 };
