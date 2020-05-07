@@ -6,7 +6,8 @@ import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
 import Profile from "../screens/Tabs/Profile";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const TabNavigation = createBottomTabNavigator();
 
@@ -33,7 +34,17 @@ export default ({ navigation }) => {
         component={StackFactory}
         initialParams={{
           initialRoute: Home,
-          custonConfig: { title: "Home" },
+          customConfig: {
+            title: "Home",
+            headerStyle: {
+              height: 80,
+            },
+            headerRight: () => (
+              <TouchableOpacity>
+                <Text>Go</Text>
+              </TouchableOpacity>
+            ),
+          },
         }}
       />
       <TabNavigation.Screen
