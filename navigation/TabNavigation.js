@@ -1,58 +1,53 @@
 import React from "react";
 import "react-native-gesture-handler";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
-import Home from "../screens/Tabs/Home";
 import Search from "../screens/Tabs/Search";
 import Notifications from "../screens/Tabs/Notifications";
 import Profile from "../screens/Tabs/Profile";
-import { View, Text } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { View } from "react-native";
+import MessagesLink from "../components/MessagesLink";
+import StackFactory from "../components/StackFactory";
+import Home from "../screens/Tabs/Home";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const TabNavigation = createBottomTabNavigator();
 
-const StackFactory = ({ route }) => {
-  const { initialRoute, customConfig } = route.params;
-  const Stack = createStackNavigator();
+const HomeStackNavigation = createStackNavigator();
 
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name={route.name}
-        component={initialRoute}
-        options={customConfig}
-      />
-    </Stack.Navigator>
-  );
-};
+const HomeStack = () => (
+  <HomeStackNavigation.Navigator>
+    <HomeStackNavigation.Screen
+      name="Home"
+      component={Home}
+      options={{
+        title: "Home",
+        headerRight: () => <MessagesLink />,
+      }}
+    />
+  </HomeStackNavigation.Navigator>
+);
 
 export default ({ navigation }) => {
   return (
     <TabNavigation.Navigator initialRouteName="Home">
-      <TabNavigation.Screen
+      <TabNavigation.Screen name="Home" component={HomeStack} />
+      {/* <TabNavigation.Screen
         name="Home"
         component={StackFactory}
         initialParams={{
           initialRoute: Home,
           customConfig: {
             title: "Home",
-            headerStyle: {
-              height: 80,
-            },
-            headerRight: () => (
-              <TouchableOpacity>
-                <Text>Go</Text>
-              </TouchableOpacity>
-            ),
+            headerRight: () => <MessagesLink />,
           },
         }}
-      />
+      /> */}
       <TabNavigation.Screen
         name="Search"
         component={StackFactory}
         initialParams={{
           initialRoute: Search,
-          custonConfig: { title: "Search" },
+          customConfig: { title: "Search" },
         }}
       />
       <TabNavigation.Screen
@@ -71,7 +66,7 @@ export default ({ navigation }) => {
         component={StackFactory}
         initialParams={{
           initialRoute: Notifications,
-          custonConfig: { title: "Notifications" },
+          customConfig: { title: "Notifications" },
         }}
       />
       <TabNavigation.Screen
@@ -79,7 +74,7 @@ export default ({ navigation }) => {
         component={StackFactory}
         initialParams={{
           initialRoute: Profile,
-          custonConfig: { title: "Profile" },
+          customConfig: { title: "Profile" },
         }}
       />
     </TabNavigation.Navigator>

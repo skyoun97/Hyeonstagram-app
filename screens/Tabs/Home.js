@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const View = styled.View`
   justify-content: center;
@@ -9,8 +10,10 @@ const View = styled.View`
 
 const Text = styled.Text``;
 
-export default () => (
+export default ({ navigation }) => (
   <View>
-    <Text>Home</Text>
+    <TouchableOpacity onPress={() => navigation.jumpTo("Messages")}>
+      <Text>Home</Text>
+    </TouchableOpacity>
   </View>
 );
