@@ -12,26 +12,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 const TabNavigation = createBottomTabNavigator();
 
-const HomeStackNavigation = createStackNavigator();
-
-const HomeStack = () => (
-  <HomeStackNavigation.Navigator>
-    <HomeStackNavigation.Screen
-      name="Home"
-      component={Home}
-      options={{
-        title: "Home",
-        headerRight: () => <MessagesLink />,
-      }}
-    />
-  </HomeStackNavigation.Navigator>
-);
-
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
+  const { SetSwipeEnabled } = route.params;
   return (
     <TabNavigation.Navigator initialRouteName="Home">
-      <TabNavigation.Screen name="Home" component={HomeStack} />
-      {/* <TabNavigation.Screen
+      <TabNavigation.Screen
         name="Home"
         component={StackFactory}
         initialParams={{
@@ -41,13 +26,19 @@ export default ({ navigation }) => {
             headerRight: () => <MessagesLink />,
           },
         }}
-      /> */}
+        listeners={{
+          tabPress: () => SetSwipeEnabled(true),
+        }}
+      />
       <TabNavigation.Screen
         name="Search"
         component={StackFactory}
         initialParams={{
           initialRoute: Search,
           customConfig: { title: "Search" },
+        }}
+        listeners={{
+          tabPress: () => SetSwipeEnabled(false),
         }}
       />
       <TabNavigation.Screen
@@ -68,6 +59,9 @@ export default ({ navigation }) => {
           initialRoute: Notifications,
           customConfig: { title: "Notifications" },
         }}
+        listeners={{
+          tabPress: () => SetSwipeEnabled(false),
+        }}
       />
       <TabNavigation.Screen
         name="Profile"
@@ -75,6 +69,9 @@ export default ({ navigation }) => {
         initialParams={{
           initialRoute: Profile,
           customConfig: { title: "Profile" },
+        }}
+        listeners={{
+          tabPress: (e) => SetSwipeEnabled(false),
         }}
       />
     </TabNavigation.Navigator>

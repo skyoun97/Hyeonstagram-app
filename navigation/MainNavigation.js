@@ -6,14 +6,8 @@ import HomeNavigation from "./HomeNavigation";
 
 const MainNavigation = createStackNavigator();
 
-export const navigationRef = React.createRef();
-
-export const navigate = (name, params) => {
-  navigationRef.current?.navigate(name, params);
-};
-
 export default () => (
-  <NavigationContainer ref={navigationRef}>
+  <NavigationContainer>
     <MainNavigation.Navigator
       initialRouteName="HomeNavigation"
       headerMode="none"
