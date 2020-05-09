@@ -46,8 +46,8 @@ export default ({ navigation, route }) => {
         component={View}
         listeners={{
           tabPress: (e) => {
+            console.log("#######################################");
             e.preventDefault();
-            console.log("ADD");
             navigation.navigate("PhotoNavigation");
           },
         }}

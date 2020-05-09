@@ -13,6 +13,11 @@ import { ThemeProvider } from "styled-components";
 import styles from "./styles";
 import NavController from "./components/NavController";
 import { AuthProvider } from "./AuthContext";
+import { YellowBox } from "react-native";
+
+YellowBox.ignoreWarnings([
+  "Non-serializable values were found in the navigation state",
+]);
 
 export default function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,7 +43,6 @@ export default function App() {
           ...apolloClientOptions,
         })
       );
-
       await AsyncStorage.setItem("isLoggedIn", "true");
       const isLoggedIn = await AsyncStorage.getItem("isLoggedIn");
       if (isLoggedIn === null || isLoggedIn === "false") {

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AppConstants from "../../AppConstants";
 
 const View = styled.View`
   justify-content: center;
@@ -8,16 +9,32 @@ const View = styled.View`
   flex: 1;
 `;
 
+const Logo = styled.Image`
+  width: ${AppConstants.width / 2.5};
+`;
+
+const ButtonContainer = styled.TouchableOpacity``;
+const Button = styled.View`
+  background-color: ${(props) => props.theme.blueColor};
+`;
+const ButtonText = styled.Text`
+  color: white;
+`;
+
 const Text = styled.Text``;
 
 export default ({ navigation }) => (
   <View>
-    <Text>Auth Home</Text>
-    <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-      <Text>Go to Login</Text>
-    </TouchableOpacity>
-    <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
-      <Text>Go to Signup</Text>
-    </TouchableOpacity>
+    <Logo resizeMode={"contain"} source={require("../../assets/logo.png")} />
+    <ButtonContainer onPress={() => navigation.navigate("Login")}>
+      <Button>
+        <ButtonText>I have an account</ButtonText>
+      </Button>
+    </ButtonContainer>
+    <ButtonContainer onPress={() => navigation.navigate("Login")}>
+      <Button>
+        <ButtonText>Create New Account</ButtonText>
+      </Button>
+    </ButtonContainer>
   </View>
 );
