@@ -1,9 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { View } from "react-native";
 import { useIsLoggedIn, useLogIn, useLogOut } from "../AuthContext";
 import MainNavigation from "../navigation/MainNavigation";
-import AuthHome from "../screens/Auth/AuthHome";
+import AuthNavigation from "../navigation/AuthNavigation";
 
 const Container = styled.View`
   flex: 1;
@@ -13,6 +12,8 @@ export default () => {
   const logIn = useLogIn();
   const logOut = useLogOut();
   return (
-    <Container>{isLoggedIn ? <MainNavigation /> : <AuthHome />}</Container>
+    <Container>
+      {isLoggedIn ? <MainNavigation /> : <AuthNavigation />}
+    </Container>
   );
 };

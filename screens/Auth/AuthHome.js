@@ -10,15 +10,29 @@ const View = styled.View`
 `;
 
 const Logo = styled.Image`
-  width: ${AppConstants.width / 2.5};
+  width: ${AppConstants.width / 2.3};
+  height: 100px;
 `;
 
-const ButtonContainer = styled.TouchableOpacity``;
-const Button = styled.View`
+const Touchable = styled.TouchableOpacity``;
+const SignUpButton = styled.View`
   background-color: ${(props) => props.theme.blueColor};
+  padding: 10px;
+  width: ${AppConstants.width * 0.9};
+  margin: 20px 50px;
+  border-radius: 4px;
 `;
-const ButtonText = styled.Text`
+const SignUpButtonText = styled.Text`
   color: white;
+  text-align: center;
+  font-weight: 600;
+`;
+
+const LoginButton = styled.View``;
+const LoginButtonText = styled.Text`
+  text-align: center;
+  font-weight: 400;
+  color: ${(props) => props.theme.blueColor};
 `;
 
 const Text = styled.Text``;
@@ -26,15 +40,15 @@ const Text = styled.Text``;
 export default ({ navigation }) => (
   <View>
     <Logo resizeMode={"contain"} source={require("../../assets/logo.png")} />
-    <ButtonContainer onPress={() => navigation.navigate("Login")}>
-      <Button>
-        <ButtonText>I have an account</ButtonText>
-      </Button>
-    </ButtonContainer>
-    <ButtonContainer onPress={() => navigation.navigate("Login")}>
-      <Button>
-        <ButtonText>Create New Account</ButtonText>
-      </Button>
-    </ButtonContainer>
+    <Touchable onPress={() => navigation.navigate("Signup")}>
+      <SignUpButton>
+        <SignUpButtonText>Create New Account</SignUpButtonText>
+      </SignUpButton>
+    </Touchable>
+    <Touchable onPress={() => navigation.navigate("Login")}>
+      <LoginButton>
+        <LoginButtonText>Login</LoginButtonText>
+      </LoginButton>
+    </Touchable>
   </View>
 );
