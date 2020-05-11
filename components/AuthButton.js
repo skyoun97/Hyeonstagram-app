@@ -12,7 +12,7 @@ const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
   background-color: ${(props) => props.theme.blueColor};
   padding: 10px;
-  width: ${AppConstants.width * 0.9};
+  width: ${AppConstants.width * 0.85};
   border-radius: 4px;
 `;
 const Text = styled.Text`
