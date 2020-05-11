@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AppConstants from "../../AppConstants";
+import AuthButton from "../../components/AuthButton";
 
 const View = styled.View`
   justify-content: center;
@@ -15,36 +16,23 @@ const Logo = styled.Image`
 `;
 
 const Touchable = styled.TouchableOpacity``;
-const SignUpButton = styled.View`
-  background-color: ${(props) => props.theme.blueColor};
-  padding: 10px;
-  width: ${AppConstants.width * 0.9};
-  margin: 20px 50px;
-  border-radius: 4px;
-`;
-const SignUpButtonText = styled.Text`
-  color: white;
-  text-align: center;
-  font-weight: 600;
-`;
 
 const LoginButton = styled.View``;
 const LoginButtonText = styled.Text`
   text-align: center;
   font-weight: 400;
+  margin-top: 20px;
   color: ${(props) => props.theme.blueColor};
 `;
-
-const Text = styled.Text``;
 
 export default ({ navigation }) => (
   <View>
     <Logo resizeMode={"contain"} source={require("../../assets/logo.png")} />
-    <Touchable onPress={() => navigation.navigate("Signup")}>
-      <SignUpButton>
-        <SignUpButtonText>Create New Account</SignUpButtonText>
-      </SignUpButton>
-    </Touchable>
+    <AuthButton
+      text={"Create New Account"}
+      onPress={() => navigation.navigate("Signup")}
+    />
+
     <Touchable onPress={() => navigation.navigate("Login")}>
       <LoginButton>
         <LoginButtonText>Login</LoginButtonText>
