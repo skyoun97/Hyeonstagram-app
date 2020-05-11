@@ -16,6 +16,9 @@ const propTypes = {
   ]),
   autoCapitalize: PropTypes.oneOf(["none", "sentences", "words", "characters"]),
   onChange: PropTypes.func.isRequired,
+  returnKeyType: PropTypes.oneOf(["done", "go", "next", "search", "send"]),
+  onEndEditing: PropTypes.func,
+  autoCorrect: PropTypes.bool,
 };
 
 const Container = styled.View`
@@ -35,6 +38,9 @@ const AuthInput = ({
   keyboardType = "default",
   autoCapitalize = "none",
   onChange,
+  returnKeyType = "send",
+  onEndEditing = () => null,
+  autoCorrect = true,
 }) => {
   return (
     <Container>
@@ -44,6 +50,9 @@ const AuthInput = ({
         value={value}
         keyboardType={keyboardType}
         autoCapitalize={autoCapitalize}
+        returnKeyType={returnKeyType}
+        onEndEditing={onEndEditing}
+        autoCorrect={autoCorrect}
       />
     </Container>
   );
