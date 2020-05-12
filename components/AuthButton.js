@@ -10,9 +10,9 @@ const propTypes = {
 
 const Touchable = styled.TouchableOpacity``;
 const Container = styled.View`
+  width: ${AppConstants.width * 0.85};
   background-color: ${(props) => props.theme.blueColor};
   padding: 10px;
-  width: ${AppConstants.width * 0.85};
   border-radius: 4px;
 `;
 const Text = styled.Text`
